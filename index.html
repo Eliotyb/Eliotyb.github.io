@@ -1333,6 +1333,26 @@
     <script src="assets/js/aos.js"></script>
     <!-- Main custom-->
     <script src="assets/js/custom.js"></script>
+    <audio id="bgMusic" src="./audio/烟火里的尘埃.mp3" loop></audio>
+     <script>
+      // 确保音频在用户交互后播放
+      document.addEventListener('click', function() {
+        var bgMusic = document.getElementById('bgMusic');
+        if (bgMusic.paused) {
+          bgMusic.play().catch(function(e) {
+            console.log('背景音乐播放失败:', e);
+          });
+        }
+      });
+      
+      // 尝试自动播放，但在大多数浏览器中会被阻止
+      document.addEventListener('DOMContentLoaded', function() {
+        var bgMusic = document.getElementById('bgMusic');
+        bgMusic.play().catch(function(e) {
+          console.log('自动播放被阻止，等待用户交互:', e);
+        });
+      });
+    </script>
 
 </body>
 
