@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="300" viewBox="0 0 800 300">
+  <defs>
+    <linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF6B35;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#C41E3A;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- 背景 -->
+  <rect width="800" height="300" fill="url(#grad4)"/>
+  
+  <!-- 左侧菜单图标 -->
+  <rect x="70" y="100" width="80" height="120" rx="5" fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="2"/>
+  <rect x="80" y="110" width="20" height="20" rx="2" fill="white" opacity="0.7"/>
+  <rect x="80" y="140" width="20" height="20" rx="2" fill="white" opacity="0.7"/>
+  <rect x="80" y="170" width="20" height="20" rx="2" fill="white" opacity="0.7"/>
+  <line x1="105" y1="120" x2="145" y2="120" stroke="white" stroke-width="1.5" opacity="0.7"/>
+  <line x1="105" y1="150" x2="145" y2="150" stroke="white" stroke-width="1.5" opacity="0.7"/>
+  <line x1="105" y1="180" x2="145" y2="180" stroke="white" stroke-width="1.5" opacity="0.7"/>
+  
+  <!-- 中心购物车 -->
+  <circle cx="400" cy="150" r="50" fill="rgba(255,255,255,0.15)" stroke="white" stroke-width="2"/>
+  <path d="M380 130 L420 130 L425 160 L375 160 Z" fill="none" stroke="white" stroke-width="2.5"/>
+  <circle cx="385" cy="170" r="5" fill="white"/>
+  <circle cx="415" cy="170" r="5" fill="white"/>
+  <text x="400" y="200" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle" font-weight="bold">订单管理</text>
+  
+  <!-- 右侧配送追踪 -->
+  <rect x="650" y="100" width="80" height="120" rx="5" fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="2"/>
+  <text x="690" y="125" font-family="Arial, sans-serif" font-size="11" fill="white" text-anchor="middle">配送跟踪</text>
+  <circle cx="670" cy="155" r="6" fill="white"/>
+  <circle cx="690" cy="155" r="6" fill="white" opacity="0.5"/>
+  <circle cx="710" cy="155" r="6" fill="white" opacity="0.3"/>
+  <line x1="676" y1="155" x2="684" y2="155" stroke="white" stroke-width="1.5"/>
+  <line x1="696" y1="155" x2="704" y2="155" stroke="white" stroke-width="1.5"/>
+  
+  <!-- 中间箭头 -->
+  <path d="M160 150 L240 150" stroke="white" stroke-width="2.5" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M560 150 L640 150" stroke="white" stroke-width="2.5" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- 支付指示 -->
+  <g opacity="0.6">
+    <rect x="350" y="220" width="100" height="25" rx="3" fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="1.5"/>
+    <text x="400" y="238" font-family="Arial, sans-serif" font-size="11" fill="white" text-anchor="middle">💳 支付处理</text>
+  </g>
+  
+  <!-- Arrow marker -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="5" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="white" />
+    </marker>
+  </defs>
+  
+  <!-- 标题 -->
+  <text x="400" y="280" font-family="Arial, sans-serif" font-size="18" fill="white" text-anchor="middle" font-weight="bold">在线订餐系统</text>
+</svg>

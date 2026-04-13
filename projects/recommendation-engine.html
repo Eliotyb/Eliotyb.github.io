@@ -29,14 +29,9 @@
         .project-image {
             width: 100%;
             height: 300px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            object-fit: cover;
             border-radius: 8px;
             margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 48px;
         }
 
         .project-title {
@@ -90,7 +85,7 @@
 <body>
     <div class="project-detail">
         <div class="project-content">
-            <div class="project-image">⭐ 推荐系统</div>
+            <img src="../assets/images/project-recommendation-engine.svg" alt="用户推荐引擎" class="project-image">
             <h1 class="project-title">用户推荐引擎</h1>
             <p class="project-category">Java + Spark + 协同过滤</p>
 

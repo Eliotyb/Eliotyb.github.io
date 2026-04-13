@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="300" viewBox="0 0 800 300">
+  <defs>
+    <linearGradient id="grad6" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00D084;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00A86B;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- 背景 -->
+  <rect width="800" height="300" fill="url(#grad6)"/>
+  
+  <!-- 日历左侧 -->
+  <rect x="60" y="70" width="140" height="160" rx="8" fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="2"/>
+  <rect x="70" y="80" width="120" height="30" rx="4" fill="rgba(255,255,255,0.3)"/>
+  <text x="130" y="102" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle" font-weight="bold">日程表</text>
+  
+  <!-- 日期格子 -->
+  <g opacity="0.6">
+    <rect x="75" y="120" width="20" height="20" rx="2" fill="white"/>
+    <text x="85" y="133" font-family="Arial, sans-serif" font-size="10" fill="#00D084" text-anchor="middle" font-weight="bold">1</text>
+    <rect x="100" y="120" width="20" height="20" rx="2" fill="white" opacity="0.7"/>
+    <text x="110" y="133" font-family="Arial, sans-serif" font-size="10" fill="#00D084" text-anchor="middle" font-weight="bold">2</text>
+    <rect x="125" y="120" width="20" height="20" rx="2" fill="white" opacity="0.5"/>
+    <text x="135" y="133" font-family="Arial, sans-serif" font-size="10" fill="#00D084" text-anchor="middle" font-weight="bold">3</text>
+  </g>
+  
+  <g opacity="0.6">
+    <rect x="75" y="150" width="20" height="20" rx="2" fill="white" opacity="0.7"/>
+    <rect x="100" y="150" width="20" height="20" rx="2" fill="white" opacity="0.5"/>
+    <rect x="125" y="150" width="20" height="20" rx="2" fill="white" opacity="0.3"/>
+  </g>
+  
+  <!-- 中间任务队列 -->
+  <rect x="280" y="90" width="240" height="120" rx="8" fill="rgba(255,255,255,0.15)" stroke="white" stroke-width="2.5"/>
+  <text x="295" y="110" font-family="Arial, sans-serif" font-size="12" fill="white" font-weight="bold">任务队列</text>
+  
+  <rect x="295" y="125" width="210" height="18" rx="3" fill="rgba(255,255,255,0.2)"/>
+  <text x="305" y="137" font-family="Arial, sans-serif" font-size="11" fill="white">📌 任务 1: 数据备份</text>
+  
+  <rect x="295" y="153" width="210" height="18" rx="3" fill="rgba(255,255,255,0.2)"/>
+  <text x="305" y="165" font-family="Arial, sans-serif" font-size="11" fill="white">📌 任务 2: 清理日志</text>
+  
+  <rect x="295" y="181" width="210" height="18" rx="3" fill="rgba(255,255,255,0.2)"/>
+  <text x="305" y="193" font-family="Arial, sans-serif" font-size="11" fill="white">📌 任务 3: 同步数据</text>
+  
+  <!-- 右侧执行状态 -->
+  <rect x="600" y="90" width="130" height="120" rx="8" fill="rgba(255,255,255,0.15)" stroke="white" stroke-width="2.5"/>
+  <text x="615" y="110" font-family="Arial, sans-serif" font-size="11" fill="white" font-weight="bold">执行状态</text>
+  
+  <!-- 状态指示 -->
+  <circle cx="620" cy="135" r="5" fill="#00FF88"/>
+  <text x="635" y="140" font-family="Arial, sans-serif" font-size="10" fill="white">运行中</text>
+  
+  <circle cx="620" cy="160" r="5" fill="#FFD700"/>
+  <text x="635" y="165" font-family="Arial, sans-serif" font-size="10" fill="white">排队中</text>
+  
+  <circle cx="620" cy="185" r="5" fill="#808080"/>
+  <text x="635" y="190" font-family="Arial, sans-serif" font-size="10" fill="white">已完成</text>
+  
+  <!-- 标题 -->
+  <text x="400" y="280" font-family="Arial, sans-serif" font-size="18" fill="white" text-anchor="middle" font-weight="bold">分布式任务调度系统</text>
+</svg>
