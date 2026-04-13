@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>黄色海报 - 项目详情</title>
+    <link href="../assets/main/css/homepages.css" rel="stylesheet" />
+    <style>
+        .project-detail {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .project-content {
+            background: white;
+            padding: 50px;
+            border-radius: 10px;
+            max-width: 800px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .project-title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .project-category {
+            color: #FFA500;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .project-description {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .project-link {
+            display: inline-block;
+            background: #FFA500;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 10px;
+            transition: background 0.3s;
+        }
+
+        .project-link:hover {
+            background: #FFD700;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="project-detail">
+        <div class="project-content">
+            <img src="../assets/images/1-6.jpg" alt="黄色海报" class="project-image">
+            <h1 class="project-title">黄色海报</h1>
+            <p class="project-category">品牌设计</p>
+
+            <div class="project-description">
+                <h3>项目介绍</h3>
+                <p>充满活力的黄色主题海报设计系列。运用暖色调营造出温暖、积极的情感氛围，适用于多种商业场景。</p>
+
+                <h3>项目特点</h3>
+                <ul style="text-align: left; display: inline-block;">
+                    <li>✓ 温暖的色彩搭配</li>
+                    <li>✓ 积极向上的设计</li>
+                    <li>✓ 创意的排版组合</li>
+                    <li>✓ 高品质的视觉传达</li>
+                </ul>
+
+                <h3>技术栈</h3>
+                <p>Adobe Photoshop | Adobe Illustrator | 品牌规范</p>
+
+                <h3>项目成果</h3>
+                <p>该黄色海报系列被广泛应用于零售、餐饮、文创等行业，获得了用户的高度好评。</p>
+            </div>
+
+            <div>
+                <a href="javascript:history.back()" class="project-link">← 返回项目列表</a>
+                <a href="../index.html" class="project-link">返回主页</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

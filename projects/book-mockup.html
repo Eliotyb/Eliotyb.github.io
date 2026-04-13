@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>书籍样机 - 项目详情</title>
+    <link href="../assets/main/css/homepages.css" rel="stylesheet" />
+    <style>
+        .project-detail {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .project-content {
+            background: white;
+            padding: 50px;
+            border-radius: 10px;
+            max-width: 800px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .project-title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .project-category {
+            color: #667eea;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .project-description {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .project-link {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 10px;
+            transition: background 0.3s;
+        }
+
+        .project-link:hover {
+            background: #764ba2;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="project-detail">
+        <div class="project-content">
+            <img src="../assets/images/1-2.jpg" alt="书籍样机" class="project-image">
+            <h1 class="project-title">书籍样机</h1>
+            <p class="project-category">印刷品</p>
+
+            <div class="project-description">
+                <h3>项目介绍</h3>
+                <p>一套专业的书籍样机设计，展示了从封面到内页的完整印刷效果。采用高端印刷工艺，呈现出精美的视觉效果。</p>
+
+                <h3>项目特点</h3>
+                <ul style="text-align: left; display: inline-block;">
+                    <li>✓ 完整的印刷设计方案</li>
+                    <li>✓ 高保真的样机展示</li>
+                    <li>✓ 专业的排版设计</li>
+                    <li>✓ 文艺气息十足</li>
+                </ul>
+
+                <h3>技术栈</h3>
+                <p>Adobe InDesign | Adobe Photoshop | 印刷工艺</p>
+
+                <h3>项目成果</h3>
+                <p>该书籍样机案例被多家出版社收藏，成为专业的产品展示范本。</p>
+            </div>
+
+            <div>
+                <a href="javascript:history.back()" class="project-link">← 返回项目列表</a>
+                <a href="../index.html" class="project-link">返回主页</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
