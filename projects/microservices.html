@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>微服务架构系统 - 项目详情</title>
+    <link href="../assets/main/css/homepages.css" rel="stylesheet" />
+    <style>
+        .project-detail {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .project-content {
+            background: white;
+            padding: 50px;
+            border-radius: 10px;
+            max-width: 900px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        .project-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 8px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+        }
+        .project-title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .project-category {
+            color: #667eea;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .project-description {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+        .tech-stack {
+            display: inline-block;
+            background: #f0f0f0;
+            padding: 10px 15px;
+            margin: 5px;
+            border-radius: 5px;
+            color: #667eea;
+            font-weight: bold;
+        }
+        .project-link {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 10px;
+            transition: background 0.3s;
+        }
+        .project-link:hover {
+            background: #764ba2;
+        }
+    </style>
+</head>
+<body>
+    <div class="project-detail">
+        <div class="project-content">
+            <div class="project-image">🏗️ 微服务</div>
+            <h1 class="project-title">微服务架构系统</h1>
+            <p class="project-category">Spring Cloud + Service Mesh</p>
+            
+            <div class="project-description">
+                <h3>📋 项目介绍</h3>
+                <p>企业级微服务架构系统，基于Spring Cloud和Istio Service Mesh。包含服务配置、服务发现、负载均衡、分布式追踪等完整解决方案，支持50+个微服务协调运作。</p>
+                
+                <h3>✨ 核心功能</h3>
+                <ul style="text-align: left; display: inline-block;">
+                    <li>✓ 服务注册与发现（Eureka）</li>
+                    <li>✓ 集中配置管理（Config Server）</li>
+                    <li>✓ 负载均衡（Ribbon/Feign）</li>
+                    <li>✓ 服务网格管理（Istio）</li>
+                    <li>✓ 分布式追踪（Jaeger）</li>
+                    <li>✓ 日志聚合分析（ELK Stack）</li>
+                </ul>
+                
+                <h3>🔧 技术栈</h3>
+                <div style="text-align: center;">
+                    <span class="tech-stack">Java</span>
+                    <span class="tech-stack">Spring Cloud</span>
+                    <span class="tech-stack">Istio</span>
+                    <span class="tech-stack">Docker</span>
+                    <span class="tech-stack">Kubernetes</span>
+                    <span class="tech-stack">Prometheus</span>
+                    <span class="tech-stack">Grafana</span>
+                </div>
+                
+                <h3>📊 项目成果</h3>
+                <p>支持50+个微服务运行，系统延迟<100ms，可用性99.95%，支持灰度发布和蓝绿部署。</p>
+                
+                <h3>🔗 GitHub仓库</h3>
+                <p><a href="https://github.com/Eliotyb" target="_blank" style="color: #667eea;">GitHub链接</a></p>
+            </div>
+            
+            <div>
+                <a href="javascript:history.back()" class="project-link">← 返回项目列表</a>
+                <a href="../index.html" class="project-link">返回主页</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
