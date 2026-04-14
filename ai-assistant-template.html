@@ -1,0 +1,57 @@
+<!-- 
+  AI Assistant Integration Script
+  
+  使用说明：
+  1. 选择以下服务之一（推荐 Crisp）
+  2. 将对应的代码复制到每个 HTML 文件的 </body> 标签前
+  3. 将 YOUR_WEBSITE_ID 替换为实际的 ID
+  
+  支持的服务：
+  - Crisp.chat（推荐）
+  - Tidio
+  - 自定义 AI 聊天框
+-->
+
+<!-- ========================================== -->
+<!-- 方案 1：Crisp AI Assistant（推荐）-->
+<!-- ========================================== -->
+<script type="text/javascript">
+    window.$crisp = [];
+    window.CRISP_WEBSITE_ID = "YOUR_CRISP_WEBSITE_ID";
+    (function () {
+        d = document;
+        s = d.createElement("script");
+        s.src = "https://client.crisp.chat/l.js";
+        s.async = 1;
+        d.getElementsByTagName("head")[0].appendChild(s);
+    })();
+</script>
+
+
+<!-- ========================================== -->
+<!-- 方案 2：Tidio AI Assistant -->
+<!-- ========================================== -->
+<!-- <script src="//code.tidio.co/YOUR_TIDIO_PUBLIC_KEY.js"></script> -->
+
+
+<!-- ========================================== -->
+<!-- 方案 3：自定义 AI 聊天框（备用）-->
+<!-- ========================================== -->
+<!-- 
+<div id="ai-chat-widget" style="
+  width: 350px;
+  height: 500px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 9999;
+  background: white;
+">
+  <iframe 
+    src="https://your-custom-chat-api.com/widget"
+    style="width: 100%; height: 100%; border: none; border-radius: 10px;"
+  ></iframe>
+</div>
+-->

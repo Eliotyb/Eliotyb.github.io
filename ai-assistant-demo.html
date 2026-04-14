@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 聊天助手演示</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* AI 聊天窗口样式 */
+        .ai-chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 380px;
+            height: 600px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .ai-chat-widget.collapsed {
+            height: 60px;
+            width: 60px;
+        }
+
+        /* 聊天头部 */
+        .chat-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px 12px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .chat-header-title {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .chat-header-subtitle {
+            font-size: 12px;
+            opacity: 0.9;
+            margin-top: 4px;
+        }
+
+        .chat-header-right {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .chat-close-btn {
+            width: 30px;
+            height: 30px;
+            border: none;
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chat-close-btn:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .ai-chat-widget.collapsed .chat-header-subtitle,
+        .ai-chat-widget.collapsed .chat-close-btn {
+            display: none;
+        }
+
+        /* 消息容器 */
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            background: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .ai-chat-widget.collapsed .chat-messages {
+            display: none;
+        }
+
+        /* 单条消息 */
+        .message {
+            display: flex;
+            gap: 8px;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message.user {
+            justify-content: flex-end;
+        }
+
+        .message-content {
+            max-width: 70%;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            line-height: 1.4;
+            word-wrap: break-word;
+        }
+
+        .message.user .message-content {
+            background: #667eea;
+            color: white;
+            border-radius: 8px 2px 8px 8px;
+        }
+
+        .message.bot .message-content {
+            background: white;
+            color: #333;
+            border-radius: 2px 8px 8px 8px;
+            border: 1px solid #e0e0e0;
+        }
+
+        /* 输入框容器 */
+        .chat-input-container {
+            display: flex;
+            gap: 8px;
+            padding: 15px;
+            background: white;
+            border-top: 1px solid #e0e0e0;
+            border-radius: 0 0 12px 12px;
+        }
+
+        .ai-chat-widget.collapsed .chat-input-container {
+            display: none;
+        }
+
+        .chat-input {
+            flex: 1;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            padding: 10px 16px;
+            font-size: 14px;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .chat-input:focus {
+            border-color: #667eea;
+        }
+
+        .chat-send-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chat-send-btn:hover {
+            background: #5568d3;
+        }
+
+        .chat-send-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* 加载指示器 */
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+            padding: 10px 14px;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #999;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+
+            0%,
+            60%,
+            100% {
+                opacity: 0.5;
+                transform: translateY(0);
+            }
+
+            30% {
+                opacity: 1;
+                transform: translateY(-10px);
+            }
+        }
+
+        /* 响应式 */
+        @media (max-width: 500px) {
+            .ai-chat-widget {
+                width: calc(100vw - 40px);
+                height: 70vh;
+                right: 20px;
+                left: 20px;
+            }
+
+            .message-content {
+                max-width: 85%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- AI 聊天小部件 -->
+    <div class="ai-chat-widget" id="aiChatWidget">
+        <!-- 头部 -->
+        <div class="chat-header" id="chatHeader">
+            <div>
+                <div class="chat-header-title">AI 助手</div>
+                <div class="chat-header-subtitle">随时为您服务</div>
+            </div>
+            <div class="chat-header-right">
+                <button class="chat-close-btn" id="chatCloseBtn">×</button>
+            </div>
+        </div>
+
+        <!-- 消息区域 -->
+        <div class="chat-messages" id="chatMessages">
+            <div class="message bot">
+                <div class="message-content">
+                    你好！我是阿彬的 AI 助手。很高兴为你服务！😊 有什么我可以帮助你的吗？
+                </div>
+            </div>
+        </div>
+
+        <!-- 输入区域 -->
+        <div class="chat-input-container">
+            <input type="text" class="chat-input" id="chatInput" placeholder="输入你的问题..." autocomplete="off">
+            <button class="chat-send-btn" id="chatSendBtn">↑</button>
+        </div>
+    </div>
+
+    <script>
+        // AI 聊天小部件逻辑
+        class AIChatWidget {
+            constructor() {
+                this.widget = document.getElementById('aiChatWidget');
+                this.messagesContainer = document.getElementById('chatMessages');
+                this.input = document.getElementById('chatInput');
+                this.sendBtn = document.getElementById('chatSendBtn');
+                this.header = document.getElementById('chatHeader');
+                this.closeBtn = document.getElementById('chatCloseBtn');
+                this.isCollapsed = false;
+
+                this.initEventListeners();
+                this.addWelcomeMessage();
+            }
+
+            initEventListeners() {
+                this.sendBtn.addEventListener('click', () => this.handleSendMessage());
+                this.input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        this.handleSendMessage();
+                    }
+                });
+                this.header.addEventListener('click', () => this.toggleCollapse());
+                this.closeBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    this.minimizeWidget();
+                });
+            }
+
+            addWelcomeMessage() {
+                // 欢迎消息已在 HTML 中
+            }
+
+            handleSendMessage() {
+                const message = this.input.value.trim();
+                if (!message) return;
+
+                // 添加用户消息
+                this.addMessage(message, 'user');
+                this.input.value = '';
+
+                // 显示"正在输入"指示器
+                this.showTypingIndicator();
+
+                // 模拟 AI 回复延迟
+                setTimeout(() => {
+                    const response = this.generateAIResponse(message);
+                    this.removeTypingIndicator();
+                    this.addMessage(response, 'bot');
+                }, 1000 + Math.random() * 1000);
+            }
+
+            addMessage(text, sender) {
+                const messageEl = document.createElement('div');
+                messageEl.className = `message ${sender}`;
+                messageEl.innerHTML = `<div class="message-content">${this.escapeHtml(text)}</div>`;
+                this.messagesContainer.appendChild(messageEl);
+                this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight;
+            }
+
+            generateAIResponse(userMessage) {
+                // 简单的 AI 回复逻辑
+                const responses = {
+                    '你好': '你好！很高兴认识你。😊 我可以帮你了解阿彬的作品和经验。有什么想知道的吗？',
+                    '介绍': '阿彬是一位全栈开发工程师，擅长前端、后端和 AI 技术。他有丰富的项目经验，包括微服务架构、API 网关等。',
+                    '项目': '阿彬完成过许多有趣的项目，包括 AI 分类系统、推荐引擎、任务调度器等。你可以访问项目页面查看详细信息！',
+                    '联系': '你可以通过这个网站的联系表单与阿彬联系，或访问他的社交媒体账号。',
+                    '谢谢': '不客气！如果还有其他问题，随时告诉我。🙌',
+                    '再见': '再见！希望我能帮到你。下次见! 👋'
+                };
+
+                // 检查关键词
+                for (const [key, value] of Object.entries(responses)) {
+                    if (userMessage.includes(key)) {
+                        return value;
+                    }
+                }
+
+                // 默认回复
+                const defaultResponses = [
+                    '这是个很好的问题！让我为你查找更多信息...',
+                    '有趣的想法！你可以在网站上找到更多相关信息。',
+                    '我理解你的意思。如果你有更具体的问题，我会很乐意帮助你！',
+                    '这很有趣！不妨告诉我更多细节？'
+                ];
+
+                return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
+            }
+
+            showTypingIndicator() {
+                const indicator = document.createElement('div');
+                indicator.className = 'message bot';
+                indicator.id = 'typingIndicator';
+                indicator.innerHTML = `
+                    <div class="typing-indicator">
+                        <span class="typing-dot"></span>
+                        <span class="typing-dot"></span>
+                        <span class="typing-dot"></span>
+                    </div>
+                `;
+                this.messagesContainer.appendChild(indicator);
+                this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight;
+            }
+
+            removeTypingIndicator() {
+                const indicator = document.getElementById('typingIndicator');
+                if (indicator) indicator.remove();
+            }
+
+            toggleCollapse() {
+                this.isCollapsed = !this.isCollapsed;
+                if (this.isCollapsed) {
+                    this.widget.classList.add('collapsed');
+                } else {
+                    this.widget.classList.remove('collapsed');
+                }
+            }
+
+            minimizeWidget() {
+                this.widget.style.display = 'none';
+            }
+
+            escapeHtml(text) {
+                const map = {
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#039;'
+                };
+                return text.replace(/[&<>"']/g, m => map[m]);
+            }
+        }
+
+        // 初始化聊天小部件
+        document.addEventListener('DOMContentLoaded', () => {
+            new AIChatWidget();
+        });
+    </script>
+
+    <!-- 示例页面内容（可删除） -->
+    <div style="padding: 40px; background: #f9f9f9; min-height: 100vh;">
+        <h1 style="text-align: center; margin-bottom: 30px;">🤖 AI 聊天助手演示</h1>
+
+        <div
+            style="max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <h2>👋 欢迎使用 AI 助手！</h2>
+            <p style="margin: 15px 0; line-height: 1.6; color: #666;">
+                右下角的蓝色聊天框就是您的 AI 助手。您可以：
+            </p>
+            <ul style="margin: 15px 0 15px 30px; line-height: 1.8; color: #666;">
+                <li>点击聊天框的头部来展开或收缩</li>
+                <li>输入问题并发送</li>
+                <li>AI 会自动回复您的消息</li>
+                <li>点击 × 按钮可以关闭窗口</li>
+            </ul>
+
+            <h3 style="margin-top: 30px; color: #333;">🎯 功能特性</h3>
+            <ul style="margin: 15px 0 15px 30px; line-height: 1.8; color: #666;">
+                <li>✅ 完全响应式设计（支持手机、平板、电脑）</li>
+                <li>✅ 流畅的动画效果</li>
+                <li>✅ 智能关键词识别</li>
+                <li>✅ 自动打字指示</li>
+                <li>✅ 消息自动滚动</li>
+            </ul>
+
+            <h3 style="margin-top: 30px; color: #333;">💡 尝试这些问题</h3>
+            <div style="background: #f5f5f5; padding: 15px; border-radius: 8px; margin-top: 15px;">
+                <p style="margin: 5px 0; color: #666;">• 你好</p>
+                <p style="margin: 5px 0; color: #666;">• 介绍一下阿彬</p>
+                <p style="margin: 5px 0; color: #666;">• 都有什么项目？</p>
+                <p style="margin: 5px 0; color: #666;">• 如何联系？</p>
+            </div>
+
+            <h3 style="margin-top: 30px; color: #333;">📝 如何集成到您的网站</h3>
+            <p style="margin: 15px 0; color: #666;">
+                只需将这个文件中的 HTML、CSS 和 JavaScript 代码复制到您的页面中。在 <code
+                    style="background: #f0f0f0; padding: 2px 6px;">handleSendMessage</code> 和 <code
+                    style="background: #f0f0f0; padding: 2px 6px;">generateAIResponse</code> 方法中，您可以集成真实的 AI API（如
+                OpenAI、Hugging Face 等）。
+            </p>
+
+            <h3 style="margin-top: 30px; color: #333;">🚀 后续升级方向</h3>
+            <ol style="margin: 15px 0 15px 30px; line-height: 1.8; color: #666;">
+                <li>集成 OpenAI API 获得更智能的回复</li>
+                <li>添加文档搜索功能</li>
+                <li>保存聊天历史到本地存储</li>
+                <li>添加语音输入/输出</li>
+                <li>集成第三方聊天服务（Crisp、Tidio）</li>
+            </ol>
+        </div>
+    </div>
+</body>
+
+</html>
